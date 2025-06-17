@@ -1,0 +1,34 @@
+
+services:
+  satu-api-uat:
+    image: satu-api-uat:latest
+    restart: always
+    build:
+      context: .
+      args:
+        NODE_ENV: 'uat'
+        NODE_PORT: '80'
+    deploy:
+      mode: replicated
+      replicas: 1
+    ports:
+      - 5001:80
+    expose:
+      - '80'
+    volumes:
+      - /usr/app/storage/uat/upload/:/app/public/upload
+      - /usr/app/storage/uat/export/:/app/public/export
+      - /usr/app/storage/uat/assets/:/app/public/assets
+      - /usr/app/storage/uat/logs/:/app/logs
+    command: yarn start
+    networks:
+      - network-db
+      - network-uat
+
+networks:
+  network-db:
+    name: network-db
+    external: true
+  network-uat:
+    name: network-uat
+    external: true

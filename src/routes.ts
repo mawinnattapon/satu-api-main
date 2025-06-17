@@ -1,0 +1,34 @@
+import { Routes } from "@nestjs/core";
+import { AuthModule } from "./app/auth/module";
+import { LookupModule } from "./app/lookup/module";
+import { FileModule } from "./app/file/module";
+import { ProfileModule } from "./app/profile/module";
+import { RoleModule } from "./app/role/module";
+import { UserModule } from "./app/user/module";
+import { MenuModule } from "./app/menu/module";
+import { CompModule } from "./app/company/module";
+import { EqmModule } from "./app/equipment/module";
+import { AssmModule } from "./app/assm/module";
+import { DashModule } from "./app/dashboard/module";
+import { CategoryModule } from "./app/category/module";
+import { FormsModule } from "./app/forms/module";
+import { ConfigModule } from "./app/config/module";
+import { ReportModule } from "./app/report/module";
+
+export const routes: Routes = [
+  { path: "/config", module: ConfigModule },
+  { path: "/auth", module: AuthModule },
+  { path: "/profile", module: ProfileModule },
+  { path: "/lookup", module: LookupModule },
+  { path: "/file", module: FileModule },
+  { path: "/role", module: RoleModule },
+  { path: "/user", module: UserModule },
+  { path: "/menu", module: MenuModule },
+  { path: "/company", module: CompModule },
+  { path: "/equipment", module: EqmModule },
+  { path: "/category", module: CategoryModule },
+  { path: "/forms", module: FormsModule },
+  { path: "/assm", module: AssmModule },
+  { path: "/dashboard", module: DashModule },
+  { path: "/report", module: ReportModule },
+];

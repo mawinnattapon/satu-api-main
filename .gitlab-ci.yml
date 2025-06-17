@@ -1,0 +1,22 @@
+
+stages:
+  - build
+  - deploy
+
+variables:
+  env: prod
+
+build:
+  stage: build
+  script:
+    - docker compose -f docker-compose.${env}.yml build
+  tags:
+    - prod
+
+deploy:
+  stage: deploy
+  script:
+    - docker stack deploy -c docker-compose.${env}.yml satu-api-${env}
+    - docker service update --force satu-api-${env}_satu-api-${env}
+  tags:
+    - prod
