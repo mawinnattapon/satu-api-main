@@ -91,7 +91,11 @@ export class AssmManager {
       param
     );
 
-    return result.map((e: any) => EqmFormsListRes.init(e));
+    console.log(`[DEBUG] eqmFormsList - Raw query result count: ${result.length}`);
+    const mappedResult = result.map((e: any) => EqmFormsListRes.init(e));
+    console.log(`[DEBUG] eqmFormsList - Mapped result count: ${mappedResult.length}`);
+    
+    return mappedResult;
   }
 
   async loadEqmFormsMaster(eqm_id: number, forms_id: number): Promise<EqmFormsItem> {
@@ -322,7 +326,8 @@ export class AssmManager {
           break;
         case InputType.dropdown:
         case InputType.choice:
-          wn = q.answers.find((e) => e.assm_aws_checked === true).warning === Warning.yes;
+          const checkedAnswer = q.answers.find((e) => e.assm_aws_checked === true);
+          wn = checkedAnswer ? checkedAnswer.warning === Warning.yes : false;
           break;
         case InputType.checkbox:
           wn = q.answers.filter((e) => e.assm_aws_checked && e.warning).length > 0;
